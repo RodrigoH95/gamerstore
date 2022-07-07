@@ -224,6 +224,10 @@ form {
     color: white;
 }
 
+#error {
+    color: red;
+    font-size: 0.85rem;
+}
 .footer {
     border-top: 5px solid var(--cl-secondary);
     background-color: var(--cl-terciary);

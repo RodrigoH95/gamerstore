@@ -59,7 +59,7 @@ def actualizar():
     _img = request.files['imagen']
     _precio = request.form['precio']
     _descuento = request.form['descuento']
-    _calificacion = request.form['calificacion']
+    _calificacion = int(request.form['calificacion'])
     id = request.form['id']
 
     now = datetime.now().strftime('%Y%H%M%S')

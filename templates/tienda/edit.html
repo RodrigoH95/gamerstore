@@ -10,11 +10,12 @@
 <body>
     {% include 'header.html' %}
     <main>
+        <div id="error"></div>
         {% for juego in juego %}
-        <form method="post" action="/actualizar" enctype="multipart/form-data">
+        <form id="form" method="post" action="/actualizar" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="id">ID:</label>
-                <input type="text" class="form-control" name="id" id="id" value="{{ juego[0] }}"/>
+                <input type="text" class="form-control" name="id" id="id" value="{{ juego[0] }}" disabled/>
               </div>
             <div class="form-group">
               <label for="nombre">Nombre del juego:</label>
@@ -47,5 +48,6 @@
     </main>
     {% include 'footer.html' %}
     <script src="/static/script.js"></script>
+    <script src="/static/validacion.js"></script>
 </body>
 </html>
