@@ -47,7 +47,7 @@ def eliminar(id):
     cursor = conn.cursor()
     cursor.execute("SELECT linkImg FROM `sql10504583`.`juegos` WHERE id=%s", id)
     fila = cursor.fetchall()
-    cloudinary.uploader.destroy(fila[0][0])
+    cloudinary.uploader.destroy(Path(fila[0][0]).stem)
     cursor.execute("DELETE FROM `sql10504583`.`juegos` WHERE id = %s;", (id))
     conn.commit()
     return redirect('/')
@@ -93,7 +93,7 @@ def actualizar():
         nuevoNombreFoto = cloudinary.CloudinaryImage(nuevoNombreFoto).build_url()
         cursor.execute("SELECT linkImg FROM `sql10504583`.`juegos` WHERE id=%s", id)
         fila = cursor.fetchall()
-        cloudinary.uploader.destroy(fila[0][0])
+        cloudinary.uploader.destroy(nuevoNombreFoto)
         cursor.execute("UPDATE `sql10504583`.`juegos` SET linkImg=%s WHERE id=%s", (nuevoNombreFoto, id))
         conn.commit()
     
