@@ -2,8 +2,18 @@ from flask import Flask, render_template, request, redirect, send_from_directory
 from flaskext.mysql import MySQL
 from datetime import datetime
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+from pathlib import Path
 
+cloudinary.config( 
+  cloud_name = "diwqcbv9y", 
+  api_key = "169594223867694", 
+  api_secret = "E_cSz0v2icml5B2QtRRNwmP3SwM" 
+)
 
+print(os.path.curdir)
 app = Flask(__name__)
 
 mysql = MySQL()
@@ -37,7 +47,7 @@ def eliminar(id):
     cursor = conn.cursor()
     cursor.execute("SELECT linkImg FROM `sql10504583`.`juegos` WHERE id=%s", id)
     fila = cursor.fetchall()
-    os.remove(os.path.join(app.config['CARPETA'], fila[0][0]))
+    cloudinary.uploader.destroy(fila[0][0])
     cursor.execute("DELETE FROM `sql10504583`.`juegos` WHERE id = %s;", (id))
     conn.commit()
     return redirect('/')
@@ -73,13 +83,17 @@ def actualizar():
     conn = mysql.connect()
     cursor = conn.cursor()
 
-    now = datetime.now().strftime("%Y%H%M%S")
+
+    now = datetime.now().strftime('%Y%H%M%S')
+
     if _img.filename != '':
-        nuevoNombreFoto = now + _img.filename
-        _img.save("uploads/" + nuevoNombreFoto)
+        nuevoNombreFoto = (now + Path(_img.filename).stem).replace(" ", "")
+        cloudinary.uploader.upload(_img, 
+        public_id = nuevoNombreFoto)
+        nuevoNombreFoto = cloudinary.CloudinaryImage(nuevoNombreFoto).build_url()
         cursor.execute("SELECT linkImg FROM `sql10504583`.`juegos` WHERE id=%s", id)
         fila = cursor.fetchall()
-        os.remove(os.path.join(app.config['CARPETA'], fila[0][0]))
+        cloudinary.uploader.destroy(fila[0][0])
         cursor.execute("UPDATE `sql10504583`.`juegos` SET linkImg=%s WHERE id=%s", (nuevoNombreFoto, id))
         conn.commit()
     
@@ -104,8 +118,10 @@ def guardar():
     now = datetime.now().strftime('%Y%H%M%S')
 
     if _img.filename != '':
-        nuevoNombreFoto = now + _img.filename
-        _img.save("uploads/" + nuevoNombreFoto)
+        nuevoNombreFoto = (now + Path(_img.filename).stem).replace(" ", "")
+        cloudinary.uploader.upload(_img, 
+        public_id = nuevoNombreFoto)
+        nuevoNombreFoto = cloudinary.CloudinaryImage(nuevoNombreFoto).build_url()
 
     sql = "INSERT INTO `juegos` (`id`, `nombre`, `desarrollador`, `linkImg`, `precio`, `descuento`, `calificacion`) VALUES (NULL, %s, %s, %s, %s, %s, %s);"
     if _descuento == None or _descuento == '':

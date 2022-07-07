@@ -12,7 +12,7 @@
     <main>
         <div class="contenedor juegos">
             {% for juego in juegos %}
-            <div class="tarjeta" style="background-image: url('/uploads/{{ juego[3] }}');">
+            <div class="tarjeta" style="background-image: url('{{juego[3]}}');">
                 <span class="calificacion titulo {%if juego[6] > 70 %} aprobado {% elif juego[6] > 40 %} regular {% else %} desaprobado {% endif %}">{{ juego[6] / 10}}</span>
                 <div class="juego-info">
                     <h2 class="nombre titulo">{{ juego[1] }}</h2>
