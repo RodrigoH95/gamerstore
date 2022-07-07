@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, send_from_directory, url_for
+from flask import Flask, render_template, request, redirect #, send_from_directory, url_for
 from flaskext.mysql import MySQL
 from datetime import datetime
 import os
@@ -23,12 +23,12 @@ app.config['MYSQL_DATABASE_PASSWORD']='m1QjA2nK9H'
 app.config['MYSQL_DATABASE_DB']='sql10504583'
 mysql.init_app(app)
 
-CARPETA = os.path.join('uploads')
-app.config['CARPETA'] = CARPETA
+# CARPETA = os.path.join('uploads')
+# app.config['CARPETA'] = CARPETA
 
-@app.route('/uploads/<imagen>')
-def uploads(imagen):
-    return send_from_directory(app.config['CARPETA'], imagen)
+# @app.route('/uploads/<imagen>')
+# def uploads(imagen):
+#     return send_from_directory(app.config['CARPETA'], imagen)
 
 @app.route('/')
 def index():
