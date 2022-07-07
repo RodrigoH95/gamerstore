@@ -37,7 +37,8 @@ def eliminar(id):
     cursor = conn.cursor()
     cursor.execute("SELECT linkImg FROM `sql10504583`.`juegos` WHERE id=%s", id)
     fila = cursor.fetchall()
-    os.remove(os.path.join(app.config['CARPETA'], fila[0][0]))
+    if fila != None:
+        os.remove(os.path.join(app.config['CARPETA'], fila[0][0]))
     cursor.execute("DELETE FROM `sql10504583`.`juegos` WHERE id = %s;", (id))
     conn.commit()
     return redirect('/')
