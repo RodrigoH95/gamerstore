@@ -37,7 +37,7 @@ def eliminar(id):
     cursor = conn.cursor()
     cursor.execute("SELECT linkImg FROM `sql10504583`.`juegos` WHERE id=%s", id)
     fila = cursor.fetchall()
-    if fila != None:
+    if len(fila) != 0:
         os.remove(os.path.join(app.config['CARPETA'], fila[0][0]))
     cursor.execute("DELETE FROM `sql10504583`.`juegos` WHERE id = %s;", (id))
     conn.commit()
@@ -60,7 +60,7 @@ def actualizar():
     _img = request.files['imagen']
     _precio = request.form['precio']
     _descuento = request.form['descuento']
-    _calificacion = int(request.form['calificacion'])
+    _calificacion = request.form['calificacion']
     id = request.form['id']
 
     now = datetime.now().strftime('%Y%H%M%S')
