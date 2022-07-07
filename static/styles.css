@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito&display=swap');
+
+:root {
+    --cl-primary: #505050;
+    --cl-secondary: #406c6c;
+    --cl-terciary: #3c3c3c;
+
+    --cl-link: #6d6d6d;
+
+    --ff-titulo: 'Bebas Neue', cursive;
+    --ff-normal: 'Nunito', sans-serif;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--ff-normal);
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--cl-primary);
+    justify-content: space-between;
+}
+
+.encabezado {
+    padding: 0 20%;
+    background-color: var(--cl-terciary);
+    border-bottom: 4px solid var(--cl-secondary);
+}
+
+.hamburguer {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--cl-secondary);
+}
+
+.titulo {
+    font-family: var(--ff-titulo);
+}
+
+.flex {
+    display: flex;
+    height: 5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--cl-secondary);
+    text-shadow: 2px 2px 0 black, -2px 2px 0 black, 2px -2px 0 black, -2px -2px 0 black;
+}
+
+.logo:hover {
+    cursor:pointer;
+    text-decoration: none;
+    color: var(--cl-secondary);
+}
+
+.nav-link {
+    text-decoration: none;
+    gap: 0.4rem;
+    color: var(--cl-link);
+    font-weight: 800;
+}
+
+.nav-link:hover {
+    color: var(--cl-secondary);
+}
+
+.boton {
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.5rem 0.8rem;
+    border: none;
+    border-radius: 4px;
+    filter: brightness(100%);
+    transition: filter 0.3s ease;
+    color: white;
+}
+
+.boton:hover {
+    text-decoration: none;
+    filter: brightness(90%);
+    color: white;
+}
+
+.boton-crear {
+    background-color: var(--cl-secondary);
+}
+
+.boton-editar {
+    background-color: var(--cl-primary);
+}
+
+.boton-eliminar {
+    background-color: var(--cl-secondary);
+}
+
+
+main {
+    margin: 2rem 15%;
+}
+
+.contenedor{
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.tarjeta {
+    position: relative;
+    border: 1px solid black;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    min-width: 380px;
+    height: 400px;
+    box-shadow: 5px 5px 0 var(--cl-secondary); 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tarjeta:hover > .juego-info {
+    bottom: 0;
+}
+
+.tarjeta:hover > .calificacion {
+    opacity: 1;
+}
+
+.calificacion {
+    align-self: end;
+    border: 3px solid black;
+    margin: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: grey;
+    width: 3rem;
+    height: 3rem;
+    font-size: 2rem;
+    border-radius: 50%;
+    text-align: right;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.aprobado {
+    background-color: #008000;
+}
+
+.regular {
+    background-color: #d7a921;
+}
+
+.desaprobado {
+    background-color: #ff0000;
+}
+
+.juego-info {
+    position: relative;
+    bottom: -200px;
+    text-align: center;
+    padding: 0.3rem;
+    color: rgb(60, 60, 60);
+    font-weight: 600;
+    background-color: #ffffffd5;
+    transition: bottom 0.3s ease;
+}
+
+.tachado {
+    color: var(--cl-link);
+    text-decoration: line-through;
+}
+
+.descuento {
+    background-color: limegreen;
+    color: white;
+    font-weight: 800;
+}
+
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+form {
+    border: 2px solid var(--cl-secondary);
+    border-radius: 10px;
+    padding: 0.5rem 2rem;
+    color: #FFF;
+    font-weight: 600;
+}
+
+.form-control {
+    color: var(--cl-secondary);
+    font-weight: 800;
+    border-color: var(--cl-secondary);
+    background-color: var(--cl-terciary);
+}
+
+.form-control:focus {
+    background-color: var(--cl-secondary);
+    border-color: var(--cl-terciary);
+    color: white;
+}
+
+.footer {
+    border-top: 5px solid var(--cl-secondary);
+    background-color: var(--cl-terciary);
+    color: var(--cl-secondary);
+    font-weight: 600;
+    height: auto;
+    padding: 0.6rem 20%;
+}
+
+.footer-texto {
+    font-size: 0.8rem;
+}
+
+.footer-texto > p {
+    margin: auto;
+}
+
+@media(max-width:1120px) {
+    .encabezado {
+        padding: 0 10%;
+    }
+}
+
+@media(max-width:768px) {
+    .encabezado {
+        flex-direction: row-reverse;
+        padding: 0 1rem;
+    }
+
+    .juego-info {
+        bottom: 0;
+        line-height: 0.8rem;
+    }
+
+    .calificacion {
+        opacity: 1;
+    }
+
+    .hamburguer {
+        display: block;
+    }
+
+    .hamburguer.active .bar:nth-child(2){
+        opacity: 0;
+    }
+
+    .hamburguer.active .bar:nth-child(1){
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburguer.active .bar:nth-child(3){
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-bar {
+        z-index: 5;
+        position: fixed;
+        left: -100%;
+        top: 5rem;
+        gap: 0;
+        flex-direction: column;
+        background-color: var(--cl-terciary);
+        width: 100%;
+        padding-bottom: 0.8rem;
+        height: auto;
+        text-align: center;
+        transition: 0.3s;
+    }
+
+    .nav-bar.active {
+        left: 0;
+    }
+
+    .footer {
+        flex-direction: column-reverse;
+        padding: 1rem 2rem;
+        text-align: center;
+    }
+}

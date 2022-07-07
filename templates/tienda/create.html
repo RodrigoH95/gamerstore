@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>GamerStore - Agregar Juego</title>
+  </head>
+  
+    {% include 'header.html' %}
+    <main>
+    <body>
+      <form method="post" action="/guardar" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="nombre">Nombre del juego:</label>
+          <input type="text" class="form-control" name="nombre" id="nombre" />
+        </div>
+        <div class="form-group">
+          <label for="desarrollador">Desarrollador:</label>
+          <input type="text" class="form-control" name="desarrollador" id="desarrollador" />
+        </div>
+        <div class="form-group">
+          <label for="imagen">Archivo de imagen:</label>
+          <input type="file" class="form-control" name="imagen" id="imagen" />
+        </div>
+        <div class="form-group">
+          <label for="precio">Precio:</label>
+          <input type="text" class="form-control" name="precio" id="precio" />
+        </div>
+        <div class="form-group">
+          <label for="descuento">Descuento (si no tiene dejar en blanco):</label>
+          <input type="text" class="form-control" name="descuento" id="descuento" />
+        </div>
+        <div class="form-group">
+          <label for="calificacion">Calificación:</label>
+          <input type="text" class="form-control" name="calificacion" id="calificacion" />
+        </div>
+        <button type="submit" class="boton boton-crear">Guardar</button>
+      </form>
+    </main>
+      {% include 'footer.html' %}
+    <script src="/static/script.js"></script>
+  </body>
+</html>
