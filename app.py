@@ -7,10 +7,10 @@ import os
 app = Flask(__name__)
 
 mysql = MySQL()
-app.config['MYSQL_DATABASE_HOST']='localhost'
-app.config['MYSQL_DATABASE_USER']='root'
-app.config['MYSQL_DATABASE_PASSWORD']='yWApJA!J(7[rTMDL'
-app.config['MYSQL_DATABASE_DB']='gamerstore'
+app.config['MYSQL_DATABASE_HOST']='sql10.freesqldatabase.com'
+app.config['MYSQL_DATABASE_USER']='sql10504583'
+app.config['MYSQL_DATABASE_PASSWORD']='m1QjA2nK9H'
+app.config['MYSQL_DATABASE_DB']='sql10504583'
 mysql.init_app(app)
 
 CARPETA = os.path.join('uploads')
@@ -22,7 +22,7 @@ def uploads(imagen):
 
 @app.route('/')
 def index():
-    sql = "SELECT * FROM `gamerstore`.`juegos`;"
+    sql = "SELECT * FROM `sql10504583`.`juegos`;"
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.execute(sql)
@@ -35,10 +35,10 @@ def index():
 def eliminar(id):
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute("SELECT linkImg FROM `gamerstore`.`juegos` WHERE id=%s", id)
+    cursor.execute("SELECT linkImg FROM `sql10504583`.`juegos` WHERE id=%s", id)
     fila = cursor.fetchall()
     os.remove(os.path.join(app.config['CARPETA'], fila[0][0]))
-    cursor.execute("DELETE FROM `gamerstore`.`juegos` WHERE id = %s;", (id))
+    cursor.execute("DELETE FROM `sql10504583`.`juegos` WHERE id = %s;", (id))
     conn.commit()
     return redirect('/')
 
@@ -46,7 +46,7 @@ def eliminar(id):
 def editar(id):
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM `gamerstore`.`juegos` WHERE id = %s;", (id))
+    cursor.execute("SELECT * FROM `sql10504583`.`juegos` WHERE id = %s;", (id))
     juego = cursor.fetchall()
     conn.commit()
 
@@ -64,7 +64,7 @@ def actualizar():
 
     now = datetime.now().strftime('%Y%H%M%S')
     
-    sql = "UPDATE `gamerstore`.`juegos` SET `nombre`=%s, `desarrollador`=%s, `precio`=%s, `descuento`=%s, `calificacion`=%s WHERE id=%s;"
+    sql = "UPDATE `sql10504583`.`juegos` SET `nombre`=%s, `desarrollador`=%s, `precio`=%s, `descuento`=%s, `calificacion`=%s WHERE id=%s;"
     
     if _descuento == None or _descuento == '':
         _descuento = "NULL"
@@ -77,10 +77,10 @@ def actualizar():
     if _img.filename != '':
         nuevoNombreFoto = now + _img.filename
         _img.save("uploads/" + nuevoNombreFoto)
-        cursor.execute("SELECT linkImg FROM `gamerstore`.`juegos` WHERE id=%s", id)
+        cursor.execute("SELECT linkImg FROM `sql10504583`.`juegos` WHERE id=%s", id)
         fila = cursor.fetchall()
         os.remove(os.path.join(app.config['CARPETA'], fila[0][3]))
-        cursor.execute("UPDATE `gamerstore`.`juegos` SET linkImg=%s WHERE id=%s", (nuevoNombreFoto, id))
+        cursor.execute("UPDATE `sql10504583`.`juegos` SET linkImg=%s WHERE id=%s", (nuevoNombreFoto, id))
         conn.commit()
     
     cursor.execute(sql, datos)
