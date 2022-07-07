@@ -25,9 +25,20 @@ form.addEventListener("submit", (e) => {
     MENSAJES.push("*Por favor, introduzca un desarrollador válido");
   }
 
-  if (!isValid(imagen) || (imagen.slice(-4) !== '.jpg' && imagen.slice(-4) !== '.png')) {
-    MENSAJES.push("*El archivo imagen no puede ser nulo y debe tener extension .jpg o .png");
+  if(!isValid(imagen)) {
+    if(document.querySelector(".img-thumbnail")) {
+      let imgSrc = document.querySelector(".img-thumbnail").src
+      if(!imgSrc) {
+        MENSAJES.push("*El archivo imagen no puede ser nulo");
+      }
+  } else {
+    MENSAJES.push("*El archivo imagen no puede ser nulo")
   }
+}
+
+if(isValid(imagen) && (imagen.slice(-4) !== '.jpg' && imagen.slice(-4) !== '.png')) {
+  MENSAJES.push("*El archivo imagen debe tener extension .jpg o .png");
+}
 
   if (!isValid(precio) || precio < 0 || !Number(precio)) {
     MENSAJES.push("*Por favor incluya un precio válido");
