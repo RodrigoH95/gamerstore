@@ -33,7 +33,7 @@ form.addEventListener("submit", (e) => {
     MENSAJES.push("*Por favor incluya un precio válido");
   }
 
-  if(descuento < 0 || descuento > 100 || !Number(descuento)) {
+  if(descuento < 0 || descuento > 100 || (!Number(descuento) && descuento !== null)) {
       MENSAJES.push("*El valor del descuento debe ser entre 0 y 100 sin símbolos");
   }
 
