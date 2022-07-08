@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, jsonify, render_template, request, redirect
 from flaskext.mysql import MySQL
 from datetime import datetime
 import os
@@ -30,9 +30,18 @@ def index():
     cursor = conn.cursor()
     cursor.execute(sql)
     juegos = cursor.fetchall()
-    print(juegos)
     conn.commit()
     return render_template('tienda/index.html', juegos=juegos)
+
+@app.route('/lista')
+def lista():
+    sql = "SELECT * FROM `sql10504583`.`juegos`;"
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute(sql)
+    juegos = cursor.fetchall()
+    conn.commit()
+    return jsonify(juegos)
 
 @app.route('/eliminar/<int:id>')
 def eliminar(id):
@@ -86,7 +95,7 @@ def actualizar():
         nuevoNombreFoto = cloudinary.CloudinaryImage(nuevoNombreFoto).build_url()
         cursor.execute("SELECT linkImg FROM `sql10504583`.`juegos` WHERE id=%s", id)
         fila = cursor.fetchall()
-        cloudinary.uploader.destroy(Path(fila[0][0].stem))
+        cloudinary.uploader.destroy(Path(fila[0][0]).stem)
         cursor.execute("UPDATE `sql10504583`.`juegos` SET linkImg=%s WHERE id=%s", (nuevoNombreFoto, id))
         conn.commit()
     
