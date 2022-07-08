@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template, request, redirect
 from flaskext.mysql import MySQL
+from pymysql.cursors import DictCursor
 from datetime import datetime
 import os
 import cloudinary
@@ -16,7 +17,7 @@ cloudinary.config(
 print(os.path.curdir)
 app = Flask(__name__)
 
-mysql = MySQL()
+mysql = MySQL(cursorclass=DictCursor)
 app.config['MYSQL_DATABASE_HOST']='sql10.freesqldatabase.com'
 app.config['MYSQL_DATABASE_USER']='sql10504583'
 app.config['MYSQL_DATABASE_PASSWORD']='m1QjA2nK9H'
@@ -57,7 +58,8 @@ def eliminar(id):
     cursor = conn.cursor()
     cursor.execute("SELECT linkImg FROM `sql10504583`.`juegos` WHERE id=%s", id)
     fila = cursor.fetchall()
-    cloudinary.uploader.destroy(Path(fila[0][0]).stem)
+    print(fila)
+    cloudinary.uploader.destroy(Path(fila[0]['linkImg']).stem)
     cursor.execute("DELETE FROM `sql10504583`.`juegos` WHERE id = %s;", (id))
     conn.commit()
     return redirect('/')
@@ -103,7 +105,7 @@ def actualizar():
         nuevoNombreFoto = cloudinary.CloudinaryImage(nuevoNombreFoto).build_url()
         cursor.execute("SELECT linkImg FROM `sql10504583`.`juegos` WHERE id=%s", id)
         fila = cursor.fetchall()
-        cloudinary.uploader.destroy(Path(fila[0][0]).stem)
+        cloudinary.uploader.destroy(Path(fila[0]['linkImg']).stem)
         cursor.execute("UPDATE `sql10504583`.`juegos` SET linkImg=%s WHERE id=%s", (nuevoNombreFoto, id))
         conn.commit()
     

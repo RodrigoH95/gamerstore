@@ -15,32 +15,32 @@
         <form id="form" method="post" action="/actualizar" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="id">ID:</label>
-                <input type="text" class="form-control" name="id" id="id" value="{{ juego[0] }}"/>
+                <input type="text" class="form-control" name="id" id="id" value="{{ juego['id'] }}"/>
               </div>
             <div class="form-group">
               <label for="nombre">Nombre del juego:</label>
-              <input type="text" class="form-control" name="nombre" id="nombre" value="{{ juego[1] }}"/>
+              <input type="text" class="form-control" name="nombre" id="nombre" value="{{ juego['nombre'] }}"/>
             </div>
             <div class="form-group">
               <label for="desarrollador">Desarrollador:</label>
-              <input type="text" class="form-control" name="desarrollador" id="desarrollador" value="{{ juego[2] }}"/>
+              <input type="text" class="form-control" name="desarrollador" id="desarrollador" value="{{ juego['desarrollador'] }}"/>
             </div>
             <div class="form-group">
               <label for="imagen">Archivo de imagen:</label>
-              <img class="img-thumbnail" width="100" src="{{ juego[3] }}" alt="">
+              <img class="img-thumbnail" width="100" src="{{ juego['linkImg'] }}" alt="">
               <input type="file" class="form-control" name="imagen" id="imagen"/>
             </div>
             <div class="form-group">
               <label for="precio">Precio:</label>
-              <input type="text" class="form-control" name="precio" id="precio" value="{{ juego[4] }}"/>
+              <input type="text" class="form-control" name="precio" id="precio" value="{{ juego['precio'] }}"/>
             </div>
             <div class="form-group">
               <label for="descuento">Descuento (si no tiene dejar en blanco):</label>
-              <input type="text" class="form-control" name="descuento" id="descuento" value="{{ juego[5] }}"/>
+              <input type="text" class="form-control" name="descuento" id="descuento" value="{{ juego['descuento'] }}"/>
             </div>
             <div class="form-group">
               <label for="calificacion">Calificación:</label>
-              <input type="text" class="form-control" name="calificacion" id="calificacion" value="{{ juego[6] }}"/>
+              <input type="text" class="form-control" name="calificacion" id="calificacion" value="{{ juego['calificacion'] }}"/>
             </div>
             <button type="submit" class="boton boton-crear">Guardar</button>
           </form>
