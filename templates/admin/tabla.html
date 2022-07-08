@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="/static/tabla.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Gamerstore - Lista de juegos</title>
+</head>
+<body>
+    <h1 class="titulo">Lista de Juegos</h1>
+    <table class="tabla tabla-lista">
+        <thead class="tabla-encabezado">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Desarrollador</th>
+                <th>Imagen</th>
+                <th>Precio</th>
+                <th>Descuento</th>
+                <th>Calificacion</th>
+                <th>Acciones</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for juego in juegos %}
+            <tr>
+                <td>{{juego['id']}}</td>
+                <td>{{juego['nombre']}}</td>
+                <td>{{juego['desarrollador']}}</td>
+                <td>{{juego['linkImg']}}</td>
+                <td>{{juego['precio']}}</td>
+                <td>{{juego['descuento']}}</td>
+                <td>{{juego['calificacion']}}</td>
+                <td>
+                    <div class="botones">
+                        <a href="/editar/{{juego['id']}}" class="boton boton-editar"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="/eliminar/{{juego['id']}}" class="boton boton-eliminar"><i class="fa-solid fa-trash"></i></a>
+                    </div>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

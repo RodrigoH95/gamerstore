@@ -50,7 +50,7 @@ def lista():
     cursor.execute(sql)
     juegos = cursor.fetchall()
     conn.commit()
-    return jsonify(juegos)
+    return render_template('admin/tabla.html', juegos = juegos)
 
 @app.route('/eliminar/<int:id>')
 def eliminar(id):

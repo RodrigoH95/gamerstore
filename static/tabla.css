@@ -1,0 +1,33 @@
+h1 {
+    margin-top: 2rem
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.tabla-lista {
+    background-color: var(--cl-primary);
+    width: 80%;
+    margin: auto;
+}
+
+th{
+    background-color: var(--cl-terciary)
+}
+
+th, td {
+    color: #acacac;
+    padding: 0.2rem;
+}
+
+tr {
+    border-collapse: collapse;
+}
+
+tr:nth-child(even) {
+    background-color: var(--cl-secondary);}
