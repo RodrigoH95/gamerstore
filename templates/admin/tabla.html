@@ -10,6 +10,10 @@
 </head>
 <body>
     <h1 class="titulo">Lista de Juegos</h1>
+    <div class="boton-tabla">
+        <a href="/nuevo-juego" class="boton boton-crear">Agregar Juego</a>
+        <a href="/" class="boton boton-editar">Volver al sitio</a>
+    </div>
     <table class="tabla tabla-lista">
         <thead class="tabla-encabezado">
             <tr>
@@ -37,7 +41,7 @@
                 <td>
                     <div class="botones">
                         <a href="/editar/{{juego['id']}}" class="boton boton-editar"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="/eliminar/{{juego['id']}}" class="boton boton-eliminar"><i class="fa-solid fa-trash"></i></a>
+                        <a href="/eliminar/{{juego['id']}}" class="boton boton-editar"><i class="fa-solid fa-trash"></i></a>
                     </div>
                 </td>
 

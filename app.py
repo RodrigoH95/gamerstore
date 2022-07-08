@@ -44,7 +44,7 @@ def index():
 
 @app.route('/lista')
 def lista():
-    sql = "SELECT * FROM `sql10504583`.`juegos`;"
+    sql = "SELECT * FROM `sql10504583`.`juegos` ORDER BY id ASC;"
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.execute(sql)
