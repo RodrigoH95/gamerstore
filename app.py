@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect
+from flaskext.mysql import MySQL
 from datetime import datetime
 import os
 import cloudinary
