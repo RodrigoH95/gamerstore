@@ -44,9 +44,7 @@ if(isValid(imagen) && (imagen.slice(-4) !== '.jpg' && imagen.slice(-4) !== '.png
     MENSAJES.push("*Por favor incluya un precio válido");
   }
 
-  if(descuento == 0) {
-    // Se admite un descuento de 0
-  }else if (descuento < 0 || descuento > 100 || (!Number(descuento) && (isValid(descuento)))) {
+if (descuento < 0 || descuento > 100 || (!Number(descuento) && (isValid(descuento)) && descuento != 0)) {
       MENSAJES.push("*El valor del descuento debe ser entre 0 y 100 sin símbolos");
   }
 
