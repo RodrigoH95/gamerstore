@@ -110,9 +110,23 @@ body {
     background-color: var(--cl-secondary);
 }
 
+.formulario-filtro {
+    max-width: 845px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+    border: none;
+    justify-content: space-between;
+}
+
+.input-filtro {
+    width: 50%;
+}
+
 
 main {
-    margin: 2rem 15%;
+    margin: 1rem 15%;
 }
 
 .contenedor{
@@ -249,12 +263,28 @@ form {
     .encabezado {
         padding: 0 10%;
     }
+
+    main {
+        margin: 1rem 5%;
+    }
 }
 
 @media(max-width:768px) {
+    main {
+        margin: 1rem;
+    }
+
     .encabezado {
         flex-direction: row-reverse;
         padding: 0 1rem;
+    }
+
+    .formulario-filtro {
+        flex-direction: column;
+    }
+
+    .input-filtro {
+        width: 100%;
     }
 
     .juego-info {

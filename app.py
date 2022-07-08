@@ -25,7 +25,15 @@ mysql.init_app(app)
 
 @app.route('/')
 def index():
-    sql = "SELECT * FROM `sql10504583`.`juegos`;"
+    filtro = request.args.get('filtrar')
+    orden = request.args.get('orden')
+    if filtro == None:
+        filtro = "id"
+    elif filtro == "precio":
+        filtro = "precio * (1 - descuento / 100)"
+    if orden == None:
+        orden = "DESC"
+    sql = f'SELECT * FROM `sql10504583`.`juegos` ORDER BY {filtro} {orden};'
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.execute(sql)

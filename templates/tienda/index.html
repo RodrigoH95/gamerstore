@@ -10,6 +10,26 @@
 <body>
     {% include 'header.html' %}
     <main>
+        <form class="formulario-filtro" action="/">
+            <select class="form-control input-filtro" name="filtrar" id="filtrar">
+                <option value="buscar" disabled selected>Filtrar por...</option>
+                <option value="nombre">Nombre</option>
+                <option value="precio">Precio</option>
+                <option value="calificacion">Calificacion</option>
+                <option value="descuento">Descuento</option>
+            </select>
+            <div class="botones-radio">
+                <div class="boton-radio">
+                    <input type="radio" name="orden" id="ordenDESC" value="DESC" checked>
+                    <label for="ordenDESC">Mayor a menor</label>
+                </div>
+                <div class="boton-radio">
+                    <input type="radio" name="orden" id="ordenASC" value="ASC">
+                    <label for="ordenASC">Menor a mayor</label>
+                </div>
+            </div>
+            <input class="boton boton-crear" type="submit" value="Filtrar">
+        </form>
         <div class="contenedor juegos">
             {% for juego in juegos %}
             <div class="tarjeta" style="background-image: url('{{juego[3]}}');">
