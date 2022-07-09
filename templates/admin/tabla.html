@@ -12,42 +12,45 @@
     <h1 class="titulo">Lista de Juegos</h1>
     <div class="boton-tabla">
         <a href="/nuevo-juego" class="boton boton-crear">Agregar Juego</a>
-        <a href="/" class="boton boton-editar">Ir al sitio</a>
+        <a href="/" class="boton boton-editar">Ir al sitio</a></br>
+        <input type="text" id="buscador" onkeyup="buscar()" placeholder="Buscar por nombre..">
+
     </div>
-    <table class="tabla tabla-lista">
-        <thead class="tabla-encabezado">
-            <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Desarrollador</th>
-                <th>Imagen</th>
-                <th>Precio</th>
-                <th>Descuento</th>
-                <th>Calificacion</th>
-                <th>Acciones</th>
-
-            </tr>
-        </thead>
-        <tbody>
-            {% for juego in juegos %}
-            <tr>
-                <td>{{juego['id']}}</td>
-                <td>{{juego['nombre']}}</td>
-                <td>{{juego['desarrollador']}}</td>
-                <td>{{juego['linkImg']}}</td>
-                <td>{{juego['precio']}}</td>
-                <td>{{juego['descuento']}}</td>
-                <td>{{juego['calificacion']}}</td>
-                <td>
-                    <div class="botones">
-                        <a href="/editar/{{juego['id']}}" class="boton boton-editar"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="/eliminar/{{juego['id']}}" class="boton boton-editar"><i class="fa-solid fa-trash"></i></a>
-                    </div>
-                </td>
-
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <div class="tabla-contenedor">
+        <table class="tabla tabla-lista" id="tabla-lista">
+            <thead class="tabla-encabezado">
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Desarrollador</th>
+                    <th>Imagen</th>
+                    <th>Precio</th>
+                    <th>Descuento</th>
+                    <th>Calificacion</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for juego in juegos %}
+                <tr>
+                    <td>{{juego['id']}}</td>
+                    <td>{{juego['nombre']}}</td>
+                    <td>{{juego['desarrollador']}}</td>
+                    <td>{{juego['linkImg']}}</td>
+                    <td>{{juego['precio']}}</td>
+                    <td>{{juego['descuento']}}</td>
+                    <td>{{juego['calificacion']}}</td>
+                    <td>
+                        <div class="botones">
+                            <a href="/editar/{{juego['id']}}" class="boton boton-editar"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="/eliminar/{{juego['id']}}" class="boton boton-editar"><i class="fa-solid fa-trash"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="/static/buscador.js"></script>
 </body>
 </html>

@@ -8,19 +8,34 @@ body {
     background-color: var(--cl-link);
 }
 
-.tabla-lista {
-    background-color: black;
-    width: 80%;
+.tabla-contenedor {
+    width: 90%;
+    display: flex;
+    justify-content: center;
     margin: 0 auto;
+}
+
+.tabla-lista {
+    display: block;
+    background-color: black;
+    overflow-x: auto;
     font-weight: 600;
     text-align: center;
 }
 
-th{
-    background-color: var(--cl-terciary)
+
+#buscador {
+    margin-top: 2rem;
+    background-color: var(--cl-terciary);
+    border-color: var(--cl-secondary);
+    border-radius: 5px;
+    padding: 0.2rem 0.4rem;
+    color: white;
+    font-weight: 600;
 }
 
 th {
+    background-color: var(--cl-terciary);
     color: white;
     padding: 0.3rem 0.2rem;
 }
