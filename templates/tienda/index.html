@@ -10,32 +10,57 @@
 <body>
     {% include 'header.html' %}
     <main>
-        <form class="formulario-filtro" action="/">
-            <select class="form-control input-filtro" name="filtrar" id="filtrar">
-                <option value="buscar" disabled selected>Filtrar por...</option>
-                <option value="nombre">Nombre</option>
-                <option value="precio">Precio</option>
-                <option value="calificacion">Calificacion</option>
-                <option value="descuento">Descuento</option>
-            </select>
-            <div class="botones-radio">
-                <div class="boton-radio">
-                    <input type="radio" name="orden" id="ordenDESC" value="DESC" checked>
-                    <label for="ordenDESC">Mayor a menor</label>
-                </div>
-                <div class="boton-radio">
-                    <input type="radio" name="orden" id="ordenASC" value="ASC">
-                    <label for="ordenASC">Menor a mayor</label>
-                </div>
-            </div>
-            <input class="boton boton-crear" type="submit" value="Filtrar">
-            <br>
-        </form>
         {% if admin %}
             <div class="contenedor">
                 <a href="/lista" class="boton btn-danger">Administrar juegos</a>
             </div>
         {% endif %}
+        {% if ofertas %}
+                <div class="contenedor-ofertas">
+                    <h2 class="subtitulo">Mejores ofertas:</h2>
+                    <div class="contenedor ofertas">
+                        {% for juego in ofertas %}
+                        <div class="tarjeta" style="background-image: url('{{juego["linkImg"]}}');">
+                            <span class="calificacion titulo {%if juego['calificacion'] >= 70 %} aprobado {% elif juego['calificacion'] >= 40 %} regular {% else %} desaprobado {% endif %}">{{ juego['calificacion'] / 10}}</span>
+                            <div class="juego-info">
+                                <h2 class="nombre titulo">{{ juego['nombre'] }}</h2>
+                                <p class="desarrollador">Desarrollador: {{ juego['desarrollador'] }}</p>
+                                <p class="precio">
+                                    {% if juego['descuento']%}
+                                    <span class="descuento"> -{{juego['descuento']}}% </span>
+                                    <span class="valor"> ARS$ {{ (juego['precio'] * (1 - juego['descuento'] / 100))|round(2) }}</span>
+                                    <span class="valor tachado"> ARS$ {{ juego['precio'] }}</span>
+                                    {% else %}
+                                    ARS$ <span class="valor">{{ juego['precio'] }}</span>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            <form class="formulario-filtro" action="#filtro" id="filtro">
+                <select class="form-control input-filtro" name="filtrar" id="filtrar">
+                    <option value="buscar" disabled selected>Filtrar por...</option>
+                    <option value="nombre">Nombre</option>
+                    <option value="precio">Precio</option>
+                    <option value="calificacion">Calificacion</option>
+                    <option value="descuento">Descuento</option>
+                </select>
+                <div class="botones-radio">
+                    <div class="boton-radio">
+                        <input type="radio" name="orden" id="ordenDESC" value="DESC" checked>
+                        <label for="ordenDESC">Mayor a menor</label>
+                    </div>
+                    <div class="boton-radio">
+                        <input type="radio" name="orden" id="ordenASC" value="ASC">
+                        <label for="ordenASC">Menor a mayor</label>
+                    </div>
+                </div>
+                <input class="boton boton-crear" type="submit" value="Filtrar">
+                <br>
+            </form>
         <div class="contenedor juegos">
             {% for juego in juegos %}
             <div class="tarjeta" style="background-image: url('{{juego["linkImg"]}}');">

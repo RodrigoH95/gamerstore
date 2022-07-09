@@ -57,8 +57,11 @@ def index():
     cursor = conn.cursor()
     cursor.execute(sql)
     juegos = cursor.fetchall()
+    sql = f'SELECT * FROM `sql10504583`.`juegos` ORDER BY descuento DESC LIMIT 4;'
+    cursor.execute(sql)
+    ofertas = cursor.fetchall()
     conn.commit()
-    return render_template('tienda/index.html', juegos=juegos, admin=is_logged_in('admin'))
+    return render_template('tienda/index.html', juegos=juegos, ofertas=ofertas, admin=is_logged_in('admin'))
 
 @app.route('/lista')
 @login_required(username='admin')

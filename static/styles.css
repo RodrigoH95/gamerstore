@@ -50,6 +50,11 @@ body {
     font-family: var(--ff-titulo);
 }
 
+.subtitulo {
+    font-family: var(--ff-titulo);
+    color: var(--cl-secondary);
+}
+
 .flex {
     display: flex;
     height: 5rem;
@@ -116,7 +121,6 @@ body {
     display: flex;
     gap: 0.4rem;
     align-items: center;
-    border: none;
     justify-content: space-between;
 }
 
@@ -135,6 +139,19 @@ main {
     justify-content: center;
     flex-wrap: wrap;
     gap: 1rem;
+}
+
+.contenedor-ofertas {
+    background-color: var(--cl-terciary);
+    border: 10px inset var(--cl-secondary);
+    text-align: center;
+    padding: 2rem 0;
+    border-radius: 10px;
+    margin: 0.8rem 0;
+}
+
+.ofertas {
+    justify-content: space-around;
 }
 
 .tarjeta {
@@ -313,9 +330,13 @@ form {
         transform: translateY(-8px) rotate(-45deg);
     }
 
+    body.active {
+        overflow:hidden;
+    }
+
     .nav-bar {
         z-index: 5;
-        position: fixed;
+        position: absolute;
         left: -100%;
         top: 5rem;
         gap: 0;
