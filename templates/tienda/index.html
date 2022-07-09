@@ -39,7 +39,7 @@
         <div class="contenedor juegos">
             {% for juego in juegos %}
             <div class="tarjeta" style="background-image: url('{{juego["linkImg"]}}');">
-                <span class="calificacion titulo {%if juego['calificacion'] > 70 %} aprobado {% elif juego['calificacion'] > 40 %} regular {% else %} desaprobado {% endif %}">{{ juego['calificacion'] / 10}}</span>
+                <span class="calificacion titulo {%if juego['calificacion'] >= 70 %} aprobado {% elif juego['calificacion'] >= 40 %} regular {% else %} desaprobado {% endif %}">{{ juego['calificacion'] / 10}}</span>
                 <div class="juego-info">
                     <h2 class="nombre titulo">{{ juego['nombre'] }}</h2>
                     <p class="desarrollador">Desarrollador: {{ juego['desarrollador'] }}</p>

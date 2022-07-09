@@ -19,10 +19,10 @@ print(os.path.curdir)
 app = Flask(__name__)
 
 messages = {
-    'login_success': Message('Iniciaste sesión!'),  # the default CSS class is `primary`
-    'login_failure': 'No se pudo iniciar sesión',  # this also uses the default CSS class
-    'is_logged_in': Message('Ya iniciaste sesión', 'success'), # this uses `success` as the CSS class
-    'logout': None, # this disables the message for logout
+    'login_success': Message('Iniciaste sesión!'),
+    'login_failure': 'No se pudo iniciar sesión',
+    'is_logged_in': Message('Ya iniciaste sesión', 'success'),
+    'logout': None,
     'login_required': 'Debe iniciar sesión para continuar',
     'access_denied': 'Acceso denegado',
     'auth_error': 'Error de autenticación： {0}'
