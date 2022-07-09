@@ -4,7 +4,11 @@
         <a class="nav-link" href="/">Inicio</a>
         <a class="nav-link" href="#">Acerca de</a>
         <a class="nav-link" href="#">Soporte</a>
-        <!-- <a href="/nuevo-juego" class="boton boton-crear">Agregar Juego</a> -->
+        {% if not admin %}
+        <a href="/login" class="boton boton-crear">Ingresar</a>
+        {% else %}
+        <a href="/logout" class="boton boton-crear">Cerrar sesión</a>
+        {% endif %}
     </nav>
     <div class="hamburguer">
         <span class="bar"></span>

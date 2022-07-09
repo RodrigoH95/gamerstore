@@ -7,6 +7,7 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 from pathlib import Path
+from flask_simplelogin import SimpleLogin, is_logged_in, login_required, Message
 
 cloudinary.config( 
   cloud_name = "diwqcbv9y", 
@@ -17,11 +18,28 @@ cloudinary.config(
 print(os.path.curdir)
 app = Flask(__name__)
 
+messages = {
+    'login_success': Message('Iniciaste sesión!'),  # the default CSS class is `primary`
+    'login_failure': 'No se pudo iniciar sesión',  # this also uses the default CSS class
+    'is_logged_in': Message('Ya iniciaste sesión', 'success'), # this uses `success` as the CSS class
+    'logout': None, # this disables the message for logout
+    'login_required': 'Debe iniciar sesión para continuar',
+    'access_denied': 'Acceso denegado',
+    'auth_error': 'Error de autenticación： {0}'
+}
+
+app.config['SECRET_KEY'] = 'clave-secreta'
+app.config['SIMPLELOGIN_USERNAME'] = 'admin'
+app.config['SIMPLELOGIN_PASSWORD'] = 'codoacodo22'
+
+SimpleLogin(app, messages=messages)
+
 mysql = MySQL(cursorclass=DictCursor)
 app.config['MYSQL_DATABASE_HOST']='sql10.freesqldatabase.com'
 app.config['MYSQL_DATABASE_USER']='sql10504583'
 app.config['MYSQL_DATABASE_PASSWORD']='m1QjA2nK9H'
 app.config['MYSQL_DATABASE_DB']='sql10504583'
+
 mysql.init_app(app)
 
 @app.route('/')
@@ -40,7 +58,7 @@ def index():
     cursor.execute(sql)
     juegos = cursor.fetchall()
     conn.commit()
-    return render_template('tienda/index.html', juegos=juegos)
+    return render_template('tienda/index.html', juegos=juegos, admin=is_logged_in('admin'))
 
 @app.route('/lista')
 def lista():
@@ -53,6 +71,7 @@ def lista():
     return render_template('admin/tabla.html', juegos = juegos)
 
 @app.route('/eliminar/<int:id>')
+@login_required(username='admin')
 def eliminar(id):
     conn = mysql.connect()
     cursor = conn.cursor()
@@ -65,6 +84,7 @@ def eliminar(id):
     return redirect('/lista')
 
 @app.route('/editar/<int:id>')
+@login_required(username='admin')
 def editar(id):
     conn = mysql.connect()
     cursor = conn.cursor()
@@ -75,6 +95,7 @@ def editar(id):
     return render_template('tienda/edit.html', juego=juego)
 
 @app.route('/actualizar', methods=['POST'])
+@login_required(username='admin')
 def actualizar():
     _nombre = request.form['nombre']
     _desarrollador = request.form['desarrollador']
@@ -115,10 +136,12 @@ def actualizar():
     return redirect('/lista')
 
 @app.route('/nuevo-juego')
+@login_required(username='admin')
 def agregar():
     return render_template('tienda/create.html')
 
 @app.route('/guardar', methods=['POST'])
+@login_required(username='admin')
 def guardar():
     _nombre = request.form['nombre']
     _desarrollador = request.form['desarrollador']

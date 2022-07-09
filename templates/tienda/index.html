@@ -29,7 +29,13 @@
                 </div>
             </div>
             <input class="boton boton-crear" type="submit" value="Filtrar">
+            <br>
         </form>
+        {% if admin %}
+            <div class="contenedor">
+                <a href="/lista" class="boton btn-danger">Administrar juegos</a>
+            </div>
+        {% endif %}
         <div class="contenedor juegos">
             {% for juego in juegos %}
             <div class="tarjeta" style="background-image: url('{{juego["linkImg"]}}');">
@@ -46,10 +52,6 @@
                         ARS$ <span class="valor">{{ juego['precio'] }}</span>
                         {% endif %}
                     </p>
-                    <!-- <div class="botones">
-                        <a href="/editar/{{juego['id']}}" class="boton boton-editar">Editar</a>
-                        <a href="/eliminar/{{juego['id']}}" class="boton boton-eliminar">Eliminar</a>
-                    </div> -->
                 </div>
             </div>
             {% endfor %}
