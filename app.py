@@ -62,7 +62,7 @@ def eliminar(id):
     cloudinary.uploader.destroy(Path(fila[0]['linkImg']).stem)
     cursor.execute("DELETE FROM `sql10504583`.`juegos` WHERE id = %s;", (id))
     conn.commit()
-    return redirect('/')
+    return redirect('/lista')
 
 @app.route('/editar/<int:id>')
 def editar(id):
@@ -112,7 +112,7 @@ def actualizar():
     cursor.execute(sql, datos)
     conn.commit()
 
-    return redirect('/')
+    return redirect('/lista')
 
 @app.route('/nuevo-juego')
 def agregar():
@@ -144,7 +144,7 @@ def guardar():
     cursor.execute(sql, datos)
     conn.commit()
     
-    return redirect('/')
+    return redirect('/lista')
 
 if __name__ == '__main__':
     app.run(debug=True)

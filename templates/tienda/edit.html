@@ -8,14 +8,14 @@
     <title>GamerStore - Editar juego</title>
 </head>
 <body>
-    {% include 'header.html' %}
     <main>
         <div id="error"></div>
         {% for juego in juego %}
         <form id="form" method="post" action="/actualizar" enctype="multipart/form-data">
+            <h1 class="titulo">Editar Juego</h1>
             <div class="form-group">
                 <label for="id">ID:</label>
-                <input type="text" class="form-control" name="id" id="id" value="{{ juego['id'] }}"/>
+                <input type="text" class="form-control" name="id" id="id" value="{{ juego['id'] }}" readonly/>
               </div>
             <div class="form-group">
               <label for="nombre">Nombre del juego:</label>
@@ -46,7 +46,6 @@
           </form>
         {% endfor %}
     </main>
-    {% include 'footer.html' %}
     <script src="/static/script.js"></script>
     <script src="/static/validacion.js"></script>
 </body>
