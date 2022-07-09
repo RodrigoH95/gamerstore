@@ -61,6 +61,7 @@ def index():
     return render_template('tienda/index.html', juegos=juegos, admin=is_logged_in('admin'))
 
 @app.route('/lista')
+@login_required(username='admin')
 def lista():
     sql = "SELECT * FROM `sql10504583`.`juegos` ORDER BY id ASC;"
     conn = mysql.connect()
