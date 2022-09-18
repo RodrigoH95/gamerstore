@@ -35,10 +35,10 @@ app.config['SIMPLELOGIN_PASSWORD'] = 'codoacodo22'
 SimpleLogin(app, messages=messages)
 
 mysql = MySQL(cursorclass=DictCursor)
-app.config['MYSQL_DATABASE_HOST']='sql10.freesqldatabase.com'
+app.config['MYSQL_DATABASE_HOST']='db4free.net'
 app.config['MYSQL_DATABASE_USER']='sql10504583'
 app.config['MYSQL_DATABASE_PASSWORD']='m1QjA2nK9H'
-app.config['MYSQL_DATABASE_DB']='sql10504583'
+app.config['MYSQL_DATABASE_DB']='gamerstore'
 
 mysql.init_app(app)
 
@@ -52,13 +52,13 @@ def index():
         filtro = "precio * (1 - descuento / 100)"
     if orden == None:
         orden = "DESC"
-    sql = f'SELECT * FROM `sql10504583`.`juegos` ORDER BY {filtro} {orden};'
+    sql = f'SELECT * FROM `gamerstore`.`juegos` ORDER BY {filtro} {orden};'
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.execute(sql)
     juegos = cursor.fetchall()
     # Seleccion de los 4 juegos con mayor descuento (Colocar las ofertas en el return)
-    # sql = f'SELECT * FROM `sql10504583`.`juegos` ORDER BY descuento DESC LIMIT 4;'
+    # sql = f'SELECT * FROM `gamerstore`.`juegos` ORDER BY descuento DESC LIMIT 4;'
     # cursor.execute(sql)
     # ofertas = cursor.fetchall()
     conn.commit()
@@ -67,7 +67,7 @@ def index():
 @app.route('/lista')
 @login_required(username='admin')
 def lista():
-    sql = "SELECT * FROM `sql10504583`.`juegos` ORDER BY id ASC;"
+    sql = "SELECT * FROM `gamerstore`.`juegos` ORDER BY id ASC;"
     conn = mysql.connect()
     cursor = conn.cursor()
     cursor.execute(sql)
@@ -80,11 +80,11 @@ def lista():
 def eliminar(id):
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute("SELECT linkImg FROM `sql10504583`.`juegos` WHERE id=%s", id)
+    cursor.execute("SELECT linkImg FROM `gamerstore`.`juegos` WHERE id=%s", id)
     fila = cursor.fetchall()
     print(fila)
     cloudinary.uploader.destroy(Path(fila[0]['linkImg']).stem)
-    cursor.execute("DELETE FROM `sql10504583`.`juegos` WHERE id = %s;", (id))
+    cursor.execute("DELETE FROM `gamerstore`.`juegos` WHERE id = %s;", (id))
     conn.commit()
     return redirect('/lista')
 
@@ -93,7 +93,7 @@ def eliminar(id):
 def editar(id):
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM `sql10504583`.`juegos` WHERE id = %s;", (id))
+    cursor.execute("SELECT * FROM `gamerstore`.`juegos` WHERE id = %s;", (id))
     juego = cursor.fetchall()
     conn.commit()
 
@@ -112,7 +112,7 @@ def actualizar():
 
     now = datetime.now().strftime('%Y%H%M%S')
     
-    sql = "UPDATE `sql10504583`.`juegos` SET `nombre`=%s, `desarrollador`=%s, `precio`=%s, `descuento`=%s, `calificacion`=%s WHERE id=%s;"
+    sql = "UPDATE `gamerstore`.`juegos` SET `nombre`=%s, `desarrollador`=%s, `precio`=%s, `descuento`=%s, `calificacion`=%s WHERE id=%s;"
     
     if _descuento == None or _descuento == '':
         _descuento = "NULL"
@@ -129,10 +129,10 @@ def actualizar():
         cloudinary.uploader.upload(_img, 
         public_id = nuevoNombreFoto)
         nuevoNombreFoto = cloudinary.CloudinaryImage(nuevoNombreFoto).build_url()
-        cursor.execute("SELECT linkImg FROM `sql10504583`.`juegos` WHERE id=%s", id)
+        cursor.execute("SELECT linkImg FROM `gamerstore`.`juegos` WHERE id=%s", id)
         fila = cursor.fetchall()
         cloudinary.uploader.destroy(Path(fila[0]['linkImg']).stem)
-        cursor.execute("UPDATE `sql10504583`.`juegos` SET linkImg=%s WHERE id=%s", (nuevoNombreFoto, id))
+        cursor.execute("UPDATE `gamerstore`.`juegos` SET linkImg=%s WHERE id=%s", (nuevoNombreFoto, id))
         conn.commit()
     
     cursor.execute(sql, datos)
