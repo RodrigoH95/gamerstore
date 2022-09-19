@@ -115,7 +115,7 @@ def actualizar():
     sql = "UPDATE `gamerstore`.`juegos` SET `nombre`=%s, `desarrollador`=%s, `precio`=%s, `descuento`=%s, `calificacion`=%s WHERE id=%s;"
     
     if _descuento == None or _descuento == '':
-        _descuento = "NULL"
+        _descuento = 0
 
     datos =(_nombre, _desarrollador, _precio, _descuento, _calificacion, id)
     conn = mysql.connect()
@@ -165,7 +165,7 @@ def guardar():
 
     sql = "INSERT INTO `juegos` (`id`, `nombre`, `desarrollador`, `linkImg`, `precio`, `descuento`, `calificacion`) VALUES (NULL, %s, %s, %s, %s, %s, %s);"
     if _descuento == None or _descuento == '':
-        _descuento = "NULL"
+        _descuento = 0
     datos =(_nombre, _desarrollador, nuevoNombreFoto, _precio, _descuento, _calificacion)
     conn = mysql.connect()
     cursor = conn.cursor()
